@@ -4,7 +4,8 @@
   "description": "stuff",
   "main": "index.js",
   "scripts": {
-    "babel": "babel --plugins transform-es2015-modules-commonjs index.js > dist.js",
+    "init-file": "echo #!/usr/bin/env node > dist.js",
+    "babel": "npm run init-file && babel --plugins transform-es2015-modules-commonjs index.js | uglifyjs -c -m toplevel - >> dist.js",
     "start": "npm run babel && node dist.js",
     "test": "eslint index.js"
   },
@@ -17,6 +18,7 @@
     "listr": "0.5.0",
     "mkdirp": "0.5.1",
     "rimraf": "2.5.4",
+    "uglify-js": "mishoo/UglifyJS2#harmony",
     "xdg-basedir": "2.0.0"
   },
   "devDependencies": {
