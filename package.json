@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "init-file": "echo #!/usr/bin/env node > dist.js",
-    "babel": "npm run init-file && babel --plugins transform-es2015-modules-commonjs index.js | uglifyjs -c -m toplevel - >> dist.js",
-    "start": "npm run babel && node dist.js",
+    "build": "npm run init-file && babel index.js | uglifyjs -c -m toplevel - >> dist.js",
+    "start": "npm run build && node dist.js",
     "test": "eslint index.js"
   },
   "author": "David Knaack",
@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.11.4",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.11.5",
+    "babel-preset-es2015": "^6.9.0",
     "eslint": "3.1.1",
     "eslint-config-airbnb-base": "5.0.0",
     "eslint-plugin-import": "1.12.0"
