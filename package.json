@@ -16,6 +16,7 @@
     "fs-jetpack": "0.9.2",
     "glob": "7.0.5",
     "listr": "0.5.0",
+    "lodash.includes": "4.2.0",
     "mkdirp": "0.5.1",
     "uglify-js": "mishoo/UglifyJS2#harmony",
     "xdg-basedir": "2.0.0"

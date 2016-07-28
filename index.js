@@ -4,44 +4,13 @@ import path from 'path'
 import execa from 'execa'
 import glob from 'glob'
 import jp from 'fs-jetpack'
+import includes from 'lodash.includes'
 import Listr from 'listr'
 import mkdirp from 'mkdirp'
 import xdg from 'xdg-basedir'
 
 const cloneDir = path.join(xdg.data, 'zsh_plugins')
 mkdirp(cloneDir)
-
-// POLYFILL
-
-if (!Array.prototype.includes) {
-  Array.prototype.includes = function(searchElement /*, fromIndex*/ ) { // eslint-disable-line
-    const O = Object(this)
-    const len = parseInt(O.length, 10) || 0
-    if (len === 0) {
-      return false
-    }
-    const n = parseInt(arguments[1], 10) || 0 // eslint-disable-line
-    let k
-    if (n >= 0) {
-      k = n
-    } else {
-      k = len + n
-      if (k < 0) { k = 0 }
-    }
-    let currentElement
-    while (k < len) {
-      currentElement = O[k]
-      if (searchElement === currentElement ||
-         (searchElement !== searchElement && currentElement !== currentElement)) { // eslint-disable-line
-        return true
-      }
-      k++
-    }
-    return false
-  }
-}
-
-// END POLYFILL
 
 let plugins = [
   'Tarrasch/zsh-colors',
@@ -85,7 +54,7 @@ const tasks = new Listr([
         return
       }
       list
-        .filter(name => !legalNames.includes(name))
+        .filter(name => !includes(legalNames, name))
         .forEach(name => jp.remove(path.join(cloneDir, name)))
     },
   },
