@@ -97,7 +97,6 @@ const tasks = new Listr([
     title: `Writing to ${path.join(cloneDir, 'plugins.zsh')}…`,
     task() {
       const pluginFile = path.join(cloneDir, 'plugins.zsh')
-      jp.remove(pluginFile)
       return jp.writeAsync(
         pluginFile,
         sourceables.map(s => `source ${s}`).join('\n') // eslint-disable-line
@@ -109,7 +108,7 @@ const tasks = new Listr([
   {
     title: 'Cleaning up old plugins…',
     task() {
-      const legalNames = plugins.map(plugin => plugin.hash)
+      const legalNames = [...plugins.map(plugin => plugin.hash), path.join(cloneDir, 'plugins.zsh')]
       const list = jp.list(cloneDir)
       if (!list) {
         return
