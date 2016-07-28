@@ -39,13 +39,13 @@ const fpaths = []
 
 const tasks = new Listr([
   {
-    title: 'Getting Paths for Cloning',
+    title: 'Getting Paths for cloning…',
     task() {
       plugins = plugins.map(plugin => new Plugin(plugin))
     },
   },
   {
-    title: 'Cleaning up',
+    title: 'Cleaning up…',
     task() {
       const legalNames = plugins.map(plugin => plugin.hash)
       legalNames.push('plugins.zsh')
@@ -59,7 +59,7 @@ const tasks = new Listr([
     },
   },
   {
-    title: 'Cloning Plugins',
+    title: 'Cloning plugins…',
     task() {
       return new Listr(plugins.map(plugin => {
         const { name, clonePath } = plugin
@@ -86,7 +86,7 @@ const tasks = new Listr([
     },
   },
   {
-    title: 'Getting zsh File ready',
+    title: 'Getting file ready to write…',
     task() {
       return new Listr(plugins.map(plugin => { // eslint-disable-line
         return {
@@ -117,7 +117,7 @@ const tasks = new Listr([
     },
   },
   {
-    title: `Writing ${path.join(cloneDir, 'plugins.zsh')}`,
+    title: `Writing to ${path.join(cloneDir, 'plugins.zsh')}…`,
     task() {
       return jp.writeAsync(
       path.join(cloneDir, 'plugins.zsh'),
