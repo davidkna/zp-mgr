@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+  - "4"
+  - "node"
+dist: trusty
+script:
+  - npm run babel
+  - npm run test
+  - chmod +x dist.js && ./dist.js
+  - cat ~/.local/share/zsh_plugins/plugins.zsh && ls -Al ~/.local/share/zsh_plugins/*
