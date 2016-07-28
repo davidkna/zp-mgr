@@ -50,7 +50,7 @@ const tasks = new Listr([
       const legalNames = plugins.map(plugin => plugin.hash)
       legalNames.push('plugins.zsh')
       const list = jp.list(cloneDir)
-      if (list === null) {
+      if (!list) {
         return
       }
       list
