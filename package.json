@@ -1,0 +1,29 @@
+{
+  "name": "zp-mgr",
+  "version": "1.0.0",
+  "description": "stuff",
+  "main": "index.js",
+  "scripts": {
+    "babel": "babel --plugins transform-es2015-modules-commonjs index.js > dist.js",
+    "start": "npm run babel && node dist.js",
+    "test": "eslint index.js"
+  },
+  "author": "David Knaack",
+  "license": "MIT",
+  "dependencies": {
+    "execa": "0.4.0",
+    "fs-jetpack": "0.9.2",
+    "glob": "7.0.5",
+    "listr": "0.5.0",
+    "mkdirp": "0.5.1",
+    "rimraf": "2.5.4",
+    "xdg-basedir": "2.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.11.4",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.11.5",
+    "eslint": "3.1.1",
+    "eslint-config-airbnb-base": "5.0.0",
+    "eslint-plugin-import": "1.12.0"
+  }
+}
