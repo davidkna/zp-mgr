@@ -1,5 +1,5 @@
 {
-  "name": "zp-mgr",
+  "name": "zsh-plugin-manager",
   "version": "1.0.0",
   "description": "stuff",
   "main": "index.js",
