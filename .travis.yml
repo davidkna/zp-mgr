@@ -5,6 +5,9 @@ node_js:
 dist: trusty
 script:
   - npm run test
+  - npm run build:nouglify
+  - chmod +x dist.js
+  - ./dist.js
   - npm run build
   - chmod +x dist.js
   - ./dist.js

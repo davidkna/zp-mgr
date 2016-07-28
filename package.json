@@ -6,6 +6,7 @@
   "scripts": {
     "init-file": "echo #!/usr/bin/env node > dist.js",
     "build": "npm run init-file && babel index.js | uglifyjs -c -m toplevel - >> dist.js",
+    "build:nouglify": "npm run init-file && babel index.js >> dist.js",
     "start": "npm run build && node dist.js",
     "test": "eslint index.js"
   },
