@@ -6,7 +6,6 @@ import glob from 'glob'
 import jp from 'fs-jetpack'
 import Listr from 'listr'
 import mkdirp from 'mkdirp'
-import rimraf from 'rimraf'
 import xdg from 'xdg-basedir'
 
 const cloneDir = path.join(xdg.data, 'zsh_plugins')
@@ -55,7 +54,7 @@ const tasks = new Listr([
       }
       list
         .filter(name => !legalNames.includes(name))
-        .forEach(name => rimraf(path.join(cloneDir, name)))
+        .forEach(name => jp.remove(path.join(cloneDir, name)))
     },
   },
   {
@@ -66,8 +65,11 @@ const tasks = new Listr([
         return {
           title: `Cloning ${name}...`,
           task() {
-            switch (jp.exists(clonePath)) {
+            switch (jp.exists(path.join(clonePath, '.git'))) {
               case false:
+                if (jp.exists(clonePath)) {
+                  jp.remove(clonePath)
+                }
                 return execa('git', ['clone', '--recursive', '--', `https://github.com/${name}.git`, clonePath])
               case 'dir':
                 execa.sync('git', ['fetch', '--all'], { cwd: clonePath })
