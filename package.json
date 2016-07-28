@@ -4,9 +4,8 @@
   "description": "stuff",
   "main": "index.js",
   "scripts": {
-    "init-file": "echo #!/usr/bin/env node > dist.js",
-    "build": "npm run init-file && babel index.js | uglifyjs -c -m toplevel - >> dist.js",
-    "build:nouglify": "npm run init-file && babel index.js >> dist.js",
+    "build": "babel index.js | uglifyjs -c -m toplevel - > dist.js",
+    "build:nouglify": "babel index.js > dist.js",
     "start": "npm run build && node dist.js",
     "test": "eslint index.js"
   },
@@ -29,6 +28,6 @@
     "eslint-plugin-import": "1.12.0"
   },
   "bin": {
-    "zpmgr": "dist.js"
+    "zpmgr": "cli.sh"
   }
 }
