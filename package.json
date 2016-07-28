@@ -4,7 +4,7 @@
   "description": "stuff",
   "main": "index.js",
   "scripts": {
-    "babel": "babel --plugins transform-es2015-modules-commonjs index.js | uglifyjs -c -m toplevel -o dist.js -",
+    "babel": "babel --plugins transform-es2015-modules-commonjs index.js | uglifyjs -c -m -o dist.js -",
     "start": "npm run babel && node dist.js",
     "test": "eslint index.js"
   },
