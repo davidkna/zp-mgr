@@ -71,7 +71,7 @@ const tasks = new Listr([
                 return execa('git', ['clone', '--recursive', '--', `https://github.com/${name}.git`, clonePath])
               case 'dir':
                 execa.sync('git', ['fetch', '--all'], { cwd: clonePath })
-                return execa('git', ['reset', '--hard', 'origin/master'], { cwd: clonePath })
+                return execa('git', ['reset', '--hard', 'origin/master', '--'], { cwd: clonePath })
               default:
                 throw new Error('Invalid clone target!')
             }
