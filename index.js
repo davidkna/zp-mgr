@@ -27,10 +27,7 @@ class Plugin {
     const sha1 = crypto.createHash('sha1')
     sha1.update(name)
     this.hash = sha1.digest('hex')
-  }
-
-  get clonePath() {
-    return path.join(cloneDir, this.hash)
+    this.clonePath = path.join(cloneDir, this.hash)
   }
 }
 
@@ -39,33 +36,13 @@ const fpaths = []
 
 const tasks = new Listr([
   {
-    title: 'Getting Paths for cloning…',
-    task() {
-      plugins = plugins.map(plugin => new Plugin(plugin))
-    },
-  },
-  {
-    title: 'Cleaning up…',
-    task() {
-      const legalNames = plugins.map(plugin => plugin.hash)
-      legalNames.push('plugins.zsh')
-      const list = jp.list(cloneDir)
-      if (!list) {
-        return
-      }
-      list
-        .filter(name => !includes(legalNames, name))
-        .forEach(name => jp.remove(path.join(cloneDir, name)))
-    },
-  },
-  {
     title: 'Cloning plugins…',
     task() {
-      return new Listr(plugins.map(plugin => {
-        const { name, clonePath } = plugin
+      return new Listr(plugins.map((plugin, i) => {
         return {
-          title: `Cloning ${name}...`,
+          title: `Cloning ${plugin}...`,
           task() {
+            const { name, clonePath } = plugins[i] = new Plugin(plugin)
             switch (jp.exists(path.join(clonePath, '.git'))) {
               case false:
                 if (jp.exists(clonePath)) {
@@ -119,11 +96,27 @@ const tasks = new Listr([
   {
     title: `Writing to ${path.join(cloneDir, 'plugins.zsh')}…`,
     task() {
+      const pluginFile = path.join(cloneDir, 'plugins.zsh')
+      jp.remove(pluginFile)
       return jp.writeAsync(
-      path.join(cloneDir, 'plugins.zsh'),
-      sourceables.map(s => `source ${s}`).join('\n') // eslint-disable-line
-      + '\n'
-      + fpaths.map(f => `fpath+=${f}`).join('\n'))
+        pluginFile,
+        sourceables.map(s => `source ${s}`).join('\n') // eslint-disable-line
+        + '\n'
+        + fpaths.map(f => `fpath+=${f}`).join('\n')
+      )
+    },
+  },
+  {
+    title: 'Cleaning up old plugins…',
+    task() {
+      const legalNames = plugins.map(plugin => plugin.hash)
+      const list = jp.list(cloneDir)
+      if (!list) {
+        return
+      }
+      list
+        .filter(name => !includes(legalNames, name))
+        .forEach(name => jp.remove(path.join(cloneDir, name)))
     },
   },
 ])
