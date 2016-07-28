@@ -127,4 +127,5 @@ const tasks = new Listr([
 
 tasks.run().catch(err => {
   console.error(err) // eslint-disable-line no-console
+  process.exit(1)
 })
