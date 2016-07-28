@@ -12,7 +12,7 @@ import xdg from 'xdg-basedir'
 const cloneDir = path.join(xdg.data, 'zsh_plugins')
 mkdirp(cloneDir)
 
-let plugins = [
+const plugins = [
   'Tarrasch/zsh-colors',
   'zsh-users/zsh-syntax-highlighting',
   'zsh-users/zsh-history-substring-search',
@@ -38,7 +38,7 @@ const tasks = new Listr([
   {
     title: 'Cloning plugins…',
     task() {
-      return new Listr(plugins.map((plugin, i) => {
+      return new Listr(plugins.map((plugin, i) => { // eslint-disable-line
         return {
           title: `Cloning ${plugin}...`,
           task() {
