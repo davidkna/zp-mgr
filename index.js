@@ -1,13 +1,13 @@
 import crypto from 'crypto'
 import path from 'path'
 
-import Listr from 'listr'
 import execa from 'execa'
-import xdg from 'xdg-basedir'
-import mkdirp from 'mkdirp'
-import jp from 'fs-jetpack'
-import rimraf from 'rimraf'
 import glob from 'glob'
+import jp from 'fs-jetpack'
+import Listr from 'listr'
+import mkdirp from 'mkdirp'
+import rimraf from 'rimraf'
+import xdg from 'xdg-basedir'
 
 const cloneDir = path.join(xdg.data, 'zsh_plugins')
 mkdirp(cloneDir)
