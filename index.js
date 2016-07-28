@@ -108,7 +108,7 @@ const tasks = new Listr([
   {
     title: 'Cleaning up old plugins…',
     task() {
-      const legalNames = [...plugins.map(plugin => plugin.hash), path.join(cloneDir, 'plugins.zsh')]
+      const legalNames = [...plugins.map(plugin => plugin.hash), 'plugins.zsh']
       const list = jp.list(cloneDir)
       if (!list) {
         return
