@@ -8,6 +8,7 @@ chmod +x dist.js
 ./dist.js
 
 echo "Test with uglify"
+rm dist.js
 npm run build
 ./dist.js
 
