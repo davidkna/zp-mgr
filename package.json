@@ -30,6 +30,6 @@
     "eslint-plugin-import": "1.12.0"
   },
   "bin": {
-    "zsh-plugin-manager": "cli.js"
+    "zsh-plugin-manager": "bin/cli.js"
   }
 }
