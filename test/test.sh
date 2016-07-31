@@ -5,7 +5,7 @@ set -e
 npm run test
 
 mkdir -p "${XDG_CONFIG_HOME:-$HOME/.cache}/zsh-plugin-manager"
-ln -sf test/zsh-plugin-manager.config.js "${XDG_CONFIG_HOME:-$HOME/.cache}/zsh-plugin-manager/config.js"
+cp test/zsh-plugin-manager.config.js "${XDG_CONFIG_HOME:-$HOME/.cache}/zsh-plugin-manager/config.js"
 
 echo "Test if works with no uglify"
 npm run build:nouglify
