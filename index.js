@@ -76,9 +76,12 @@ const tasks = new Listr([
               plugins[i] = new Plugin(p)
             }
             const plugin = plugins[i]
-            plugin.download()
-            sourceables[i] = plugin.getSourceFile()
-            fpaths[i] = plugin.getFpath()
+            return plugin
+              .download()
+              .then(() => {
+                sourceables[i] = plugin.getSourceFile()
+                fpaths[i] = plugin.getFpath()
+              })
           },
         }
       }), {
