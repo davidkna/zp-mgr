@@ -2,7 +2,7 @@ import crypto from 'crypto'
 import path from 'path'
 
 import execa from 'execa'
-import glob from 'glob'
+import findup from 'findup-sync'
 import jp from 'fs-jetpack'
 import includes from 'lodash.includes'
 import Listr from 'listr'
@@ -10,16 +10,13 @@ import mkdirp from 'mkdirp'
 import xdg from 'xdg-basedir'
 
 const cloneDir = path.join(xdg.data, 'zsh_plugins')
+
 mkdirp(cloneDir)
 
-const plugins = [
-  'Tarrasch/zsh-colors',
-  'zsh-users/zsh-syntax-highlighting',
-  'zsh-users/zsh-history-substring-search',
-  'zsh-users/zsh-completions',
-  'mafredri/zsh-async',
-  'sindresorhus/pure',
-]
+const plugins = require(path.join(xdg.config, 'zsh-plugin-manager', 'config.js'))
+const sourceables = new Array(plugins.length)
+const fpaths = new Array(plugins.length)
+
 
 class Plugin {
   constructor(name) {
@@ -29,63 +26,59 @@ class Plugin {
     this.hash = sha1.digest('hex')
     this.clonePath = path.join(cloneDir, this.hash)
   }
-}
 
-const sourceables = []
-const fpaths = []
+  download() {
+    const { name, clonePath } = this
+    switch (jp.exists(path.join(clonePath, '.git'))) {
+      case false:
+        if (jp.exists(clonePath)) {
+          jp.remove(clonePath)
+        }
+        return execa('git', ['clone', '--recursive', '--', `https://github.com/${name}.git`, clonePath])
+      case 'dir':
+        execa.sync('git', ['fetch', '--all'], { cwd: clonePath })
+        return execa('git', ['reset', '--hard', 'origin/master', '--'], { cwd: clonePath })
+      default:
+        throw new Error('Invalid clone target!')
+    }
+  }
+
+  getFpath() {
+    return this.clonePath
+  }
+
+  getSourceFile() {
+    const actualName = this.name.split('/')[1]
+    const globs = [
+      `${actualName}?(.plugin).?(z)sh`,
+      '*.plugin.zsh',
+      'init.zsh',
+      '*.zsh',
+      '*.sh',
+    ]
+
+    return findup(globs, {
+      cwd: this.clonePath,
+      nocase: true,
+    })
+  }
+}
 
 const tasks = new Listr([
   {
-    title: 'Cloning plugins…',
+    title: 'Downloading plugins…',
     task() {
-      return new Listr(plugins.map((plugin, i) => { // eslint-disable-line
+      return new Listr(plugins.map((p, i) => { // eslint-disable-line
         return {
-          title: `Cloning ${plugin}...`,
+          title: `Downloading ${p}...`,
           task() {
-            const { name, clonePath } = plugins[i] = new Plugin(plugin)
-            switch (jp.exists(path.join(clonePath, '.git'))) {
-              case false:
-                if (jp.exists(clonePath)) {
-                  jp.remove(clonePath)
-                }
-                return execa('git', ['clone', '--recursive', '--', `https://github.com/${name}.git`, clonePath])
-              case 'dir':
-                execa.sync('git', ['fetch', '--all'], { cwd: clonePath })
-                return execa('git', ['reset', '--hard', 'origin/master', '--'], { cwd: clonePath })
-              default:
-                throw new Error('Invalid clone target!')
+            if (typeof plugins[i] === 'string') {
+              plugins[i] = new Plugin(p)
             }
-          },
-        }
-      }), {
-        concurrent: true,
-      })
-    },
-  },
-  {
-    title: 'Getting file ready to write…',
-    task() {
-      return new Listr(plugins.map(plugin => { // eslint-disable-line
-        return {
-          title: `Getting ${plugin.name} ready...`,
-          task() {
-            const name = plugin.name.split('/')[1]
-            const globs = [
-              `${name}.plugin.zsh`,
-              '*.plugin.zsh',
-              'init.zsh',
-              '*.zsh',
-              '*.sh',
-            ]
-            fpaths.push(plugin.clonePath)
-            for (let i = 0; i < globs.length; i++) {
-              const list = glob.sync(path.join(plugin.clonePath, globs[i]))
-
-              if (list.length !== 0) {
-                sourceables.push(list[0])
-                break
-              }
-            }
+            const plugin = plugins[i]
+            plugin.download()
+            sourceables[i] = plugin.getSourceFile()
+            fpaths[i] = plugin.getFpath()
           },
         }
       }), {
@@ -97,11 +90,16 @@ const tasks = new Listr([
     title: `Writing to ${path.join(cloneDir, 'plugins.zsh')}…`,
     task() {
       const pluginFile = path.join(cloneDir, 'plugins.zsh')
+      const src = sourceables
+        .filter(s => s)
+        .map(s => `source ${s}`).join('\n')
+      const fp = fpaths
+        .filter(f => f)
+        .map(f => `fpath+=${f}`).join('\n')
+
       return jp.writeAsync(
         pluginFile,
-        sourceables.map(s => `source ${s}`).join('\n') // eslint-disable-line
-        + '\n'
-        + fpaths.map(f => `fpath+=${f}`).join('\n')
+        `${src}\n${fp}`
       )
     },
   },

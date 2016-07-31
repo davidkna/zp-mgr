@@ -4,7 +4,7 @@ node_js:
   - "node"
 dist: trusty
 script:
-  - bash ./test.sh
+  - bash ./test/test.sh
 env:
   - CXX=g++-4.8
 addons:
