@@ -34,10 +34,12 @@ class Plugin {
         if (jp.exists(clonePath)) {
           jp.remove(clonePath)
         }
-        return execa('git', ['clone', '--recursive', '--', `https://github.com/${name}.git`, clonePath])
+        execa.sync('git', ['clone', '--recursive', '--', `https://github.com/${name}.git`, clonePath])
+        break
       case 'dir':
         execa.sync('git', ['fetch', '--all'], { cwd: clonePath })
-        return execa('git', ['reset', '--hard', 'origin/master', '--'], { cwd: clonePath })
+        execa.sync('git', ['reset', '--hard', 'origin/master', '--'], { cwd: clonePath })
+        break
       default:
         throw new Error('Invalid clone target!')
     }
@@ -76,12 +78,9 @@ const tasks = new Listr([
               plugins[i] = new Plugin(p)
             }
             const plugin = plugins[i]
-            return plugin
-              .download()
-              .then(() => {
-                sourceables[i] = plugin.getSourceFile()
-                fpaths[i] = plugin.getFpath()
-              })
+            plugin.download()
+            sourceables[i] = plugin.getSourceFile()
+            fpaths[i] = plugin.getFpath()
           },
         }
       }), {
