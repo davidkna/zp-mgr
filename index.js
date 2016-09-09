@@ -27,18 +27,18 @@ class Plugin {
     this.clonePath = path.join(cloneDir, this.hash)
   }
 
-  download() {
+  async download() {
     const { name, clonePath } = this
     switch (jp.exists(path.join(clonePath, '.git'))) {
       case false:
         if (jp.exists(clonePath)) {
           jp.remove(clonePath)
         }
-        execa.sync('git', ['clone', '--recursive', '--', `https://github.com/${name}.git`, clonePath])
+        await execa('git', ['clone', '--recursive', '--', `https://github.com/${name}.git`, clonePath])
         break
       case 'dir':
-        execa.sync('git', ['fetch', '--all'], { cwd: clonePath })
-        execa.sync('git', ['reset', '--hard', 'origin/master', '--'], { cwd: clonePath })
+        await execa('git', ['fetch', '--all'], { cwd: clonePath })
+        await execa('git', ['reset', '--hard', 'origin/master', '--'], { cwd: clonePath })
         break
       default:
         throw new Error('Invalid clone target!')
@@ -73,12 +73,12 @@ const tasks = new Listr([
       return new Listr(plugins.map((p, i) => { // eslint-disable-line
         return {
           title: `Downloading ${p}...`,
-          task() {
+          async task() {
             if (typeof plugins[i] === 'string') {
               plugins[i] = new Plugin(p)
             }
             const plugin = plugins[i]
-            plugin.download()
+            await plugin.download()
             sourceables[i] = plugin.getSourceFile()
             fpaths[i] = plugin.getFpath()
           },
@@ -90,7 +90,7 @@ const tasks = new Listr([
   },
   {
     title: `Writing to ${path.join(cloneDir, 'plugins.zsh')}…`,
-    task() {
+    async task() {
       const pluginFile = path.join(cloneDir, 'plugins.zsh')
       const src = sourceables
         .filter(s => s)
@@ -99,7 +99,7 @@ const tasks = new Listr([
         .filter(f => f)
         .map(f => `fpath+=${f}`).join('\n')
 
-      return jp.writeAsync(
+      await jp.writeAsync(
         pluginFile,
         `${src}\n${fp}`
       )
@@ -107,7 +107,7 @@ const tasks = new Listr([
   },
   {
     title: 'Cleaning up old plugins…',
-    task() {
+    async task() {
       const legalNames = [...plugins.map(plugin => plugin.hash), 'plugins.zsh']
       const list = jp.list(cloneDir)
       if (!list) {
@@ -120,7 +120,4 @@ const tasks = new Listr([
   },
 ])
 
-tasks.run().catch(err => {
-  console.error(err) // eslint-disable-line no-console
-  process.exit(1)
-})
+tasks.run()
