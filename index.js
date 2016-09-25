@@ -13,7 +13,7 @@ const cloneDir = path.join(xdg.data, 'zsh_plugins')
 
 mkdirp(cloneDir)
 
-const plugins = require(path.join(xdg.config, 'zsh-plugin-manager', 'config.js'))
+const plugins = require(path.join(xdg.config, 'zsh-plugin-manager', 'config.js')) // eslint-disable-line import/no-dynamic-require
 const sourceables = new Array(plugins.length)
 const fpaths = new Array(plugins.length)
 
