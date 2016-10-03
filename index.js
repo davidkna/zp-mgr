@@ -1,4 +1,3 @@
-import crypto from 'crypto'
 import path from 'path'
 
 import execa from 'execa'
@@ -21,10 +20,8 @@ const fpaths = new Array(plugins.length)
 class Plugin {
   constructor(name) {
     this.name = name
-    const sha1 = crypto.createHash('sha1')
-    sha1.update(name)
-    this.hash = sha1.digest('hex')
-    this.clonePath = path.join(cloneDir, this.hash)
+    this.uniqueName = name.split('/')[1]
+    this.clonePath = path.join(cloneDir, this.uniqueName)
   }
 
   async download() {
@@ -108,7 +105,7 @@ const tasks = new Listr([
   {
     title: 'Cleaning up old plugins…',
     async task() {
-      const legalNames = [...plugins.map(plugin => plugin.hash), 'plugins.zsh']
+      const legalNames = [...plugins.map(plugin => plugin.uniqueName), 'plugins.zsh']
       const list = jp.list(cloneDir)
       if (!list) {
         return
