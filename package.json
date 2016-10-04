@@ -10,7 +10,7 @@
   },
   "author": "David Knaack",
   "license": "MIT",
-  "repository": "davidkna/zsh-plugin-manager",
+  "repository": "davidkna/zsh-goggles",
   "dependencies": {
     "execa": "0.4.0",
     "findup-sync": "0.4.2",
