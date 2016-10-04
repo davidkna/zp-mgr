@@ -20,13 +20,12 @@ export class Plugin {
   }
 
   getFpath() {
-    return this.downloadPath
+    return this.getDownloadPath()
   }
 
   getSourceFile() {
-    const actualName = this.name.split('/')[1]
     const globs = [
-      `${actualName}?(.plugin).?(z)sh`,
+      `${this.uniqueName}?(.plugin).?(z)sh`,
       '*.plugin.zsh',
       'init.zsh',
       '*.zsh',
@@ -34,8 +33,9 @@ export class Plugin {
     ]
 
     return findup(globs, {
-      cwd: this.downloadPath,
+      cwd: this.getDownloadPath(),
       nocase: true,
+      maxdepth: 0,
     })
   }
 
