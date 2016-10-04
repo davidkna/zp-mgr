@@ -4,20 +4,20 @@ set -e
 
 npm run test
 
-echo "Config file is at ${XDG_CONFIG_HOME:-$HOME/.config}/zsh-plugin-manager/config.js"
+echo "Config file is at ${XDG_CONFIG_HOME:-$HOME/.config}/zsh-goggles/config.js"
 
-mkdir -p "${XDG_CONFIG_HOME:-$HOME/.config}/zsh-plugin-manager"
-cp test/zsh-plugin-manager.config.js "${XDG_CONFIG_HOME:-$HOME/.config}/zsh-plugin-manager/config.js"
+mkdir -p "${XDG_CONFIG_HOME:-$HOME/.config}/zsh-goggles"
+cp test/zsh-goggles.config.js "${XDG_CONFIG_HOME:-$HOME/.config}/zsh-goggles/config.js"
 
 echo "Test if it works with no uglify"
-npm run build:nouglify
+npm run devbuild
 node bin/cli.js
 
 echo "Source file:"
 cat ~/.local/share/zsh_plugins/plugins.zsh
 
 echo "Test if it works with uglify"
-rm bin/dist.js
+rm -rf dist
 npm run build
 node bin/cli.js
 
