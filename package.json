@@ -42,6 +42,6 @@
     "node": ">= 6.0.0"
   },
   "bin": {
-    "zsh-goggles": "dist/cli.js"
+    "zgoggles": "dist/cli.js"
   }
 }
