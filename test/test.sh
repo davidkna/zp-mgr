@@ -11,7 +11,7 @@ cp test/zsh-goggles.config.js "${XDG_CONFIG_HOME:-$HOME/.config}/zsh-goggles/con
 
 echo "Test if it works with no uglify"
 npm run devbuild
-node bin/cli.js
+node dist/cli.js
 
 echo "Source file:"
 cat ~/.local/share/zsh_plugins/plugins.zsh
@@ -19,7 +19,7 @@ cat ~/.local/share/zsh_plugins/plugins.zsh
 echo "Test if it works with uglify"
 rm -rf dist
 npm run build
-node bin/cli.js
+node dist/cli.js
 
 echo "Source file:"
 cat ~/.local/share/zsh_plugins/plugins.zsh
