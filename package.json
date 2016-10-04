@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "gulp build",
+    "clean": "rm -r dist",
     "devbuild": "gulp devbuild",
     "test": "gulp lint"
   },
