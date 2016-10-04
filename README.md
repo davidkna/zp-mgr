@@ -1,2 +1,2 @@
-# zsh-plugin-manager
-[![Build Status](https://travis-ci.org/davidkna/zsh-plugin-manager.svg?branch=master)](https://travis-ci.org/davidkna/zsh-plugin-manager)
+# zsh-googles
+[![Build Status](https://travis-ci.org/davidkna/zsh-goggles.svg?branch=master)](https://travis-ci.org/davidkna/zsh-goggles)

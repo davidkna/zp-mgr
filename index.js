@@ -8,11 +8,11 @@ import Listr from 'listr'
 import mkdirp from 'mkdirp'
 import xdg from 'xdg-basedir'
 
-const cloneDir = path.join(xdg.data, 'zsh_plugins')
+const cloneDir = path.join(xdg.data, 'zsh-goggles')
 
 mkdirp(cloneDir)
 
-const plugins = require(path.join(xdg.config, 'zsh-plugin-manager', 'config.js')) // eslint-disable-line import/no-dynamic-require
+const plugins = require(path.join(xdg.config, 'zsh-goggles', 'config.js')) // eslint-disable-line import/no-dynamic-require
 const sourceables = new Array(plugins.length)
 const fpaths = new Array(plugins.length)
 
