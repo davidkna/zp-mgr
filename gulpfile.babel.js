@@ -20,6 +20,18 @@ export function build() {
     .pipe(gulp.dest('./dist'))
 }
 
+export function devbuild() {
+  const f = filter('src/cli.js', {
+    restore: true,
+  })
+  return gulp.src('./src/*.js')
+    .pipe(babel())
+    .pipe(f)
+    .pipe(header('#!/usr/bin/env node\n'))
+    .pipe(f.restore)
+    .pipe(gulp.dest('./dist'))
+}
+
 export function lint() {
   return gulp.src(['./*.js', './src/*.js'])
     .pipe(eslint())
