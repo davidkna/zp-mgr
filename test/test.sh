@@ -14,7 +14,7 @@ npm run devbuild
 node dist/cli.js
 
 echo "Source file:"
-cat ~/.local/share/zsh_plugins/plugins.zsh
+cat ~/.local/share/zsh-goggles/plugins.zsh
 
 echo "Test if it works with uglify"
 rm -rf dist
@@ -22,7 +22,7 @@ npm run build
 node dist/cli.js
 
 echo "Source file:"
-cat ~/.local/share/zsh_plugins/plugins.zsh
+cat ~/.local/share/zsh-goggles/plugins.zsh
 
 echo "Plugin folder contents:"
-ls -Al ~/.local/share/zsh_plugins/*
+ls -Al ~/.local/share/zsh-goggles/*
