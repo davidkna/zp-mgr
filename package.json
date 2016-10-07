@@ -17,7 +17,7 @@
     "findup-sync": "0.4.2",
     "fs-jetpack": "0.9.2",
     "listr": "0.6.1",
-    "lodash.includes": "4.3.0",
+    "lodash": "4.16.4",
     "mkdirp": "0.5.1",
     "uglify-js": "mishoo/UglifyJS2#harmony",
     "xdg-basedir": "2.0.0"
