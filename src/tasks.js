@@ -12,8 +12,7 @@ mkdirp(downloadDir)
 
 const config = require(configFile) // eslint-disable-line import/no-dynamic-require
 const plugins = entries(config)
-const sourceables = new Array(plugins.length)
-const fpaths = new Array(plugins.length)
+const targetEntries = new Array(plugins.length)
 
 export const downloadTasks = plugins.map((p, i) => { // eslint-disable-line
   return {
@@ -25,24 +24,16 @@ export const downloadTasks = plugins.map((p, i) => { // eslint-disable-line
       } else {
         await plugin.download()
       }
-      sourceables[i] = plugin.sourceFile
-      fpaths[i] = plugin.fpath
+      targetEntries[i] = await plugin.entry()
     },
   }
 })
 
 
 export async function writeTask() {
-  const src = sourceables
-    .filter(s => s)
-    .map(s => `source ${s}`).join('\n')
-  const fp = fpaths
-    .filter(f => f)
-    .map(f => `fpath+=${f}`).join('\n')
-
   await jp.writeAsync(
     sourceFile,
-    `${src}\n${fp}`
+    `${targetEntries.join('\n')}`
   )
 }
 

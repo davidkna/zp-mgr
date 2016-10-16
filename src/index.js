@@ -1,6 +1,8 @@
 import path from 'path'
 import execa from 'execa'
 import findup from 'findup-sync'
+import jp from 'fs-jetpack'
+import entries from 'lodash/entries'
 import isString from 'lodash/isString'
 import isFunction from 'lodash/isFunction'
 import xdg from 'xdg-basedir'
@@ -11,20 +13,28 @@ export const paths = {
   sourceFile: path.join(xdg.data, 'zsh-goggles', 'plugins.zsh'),
 }
 
+const defaultConfig = {
+  standalone: true,
+  source: true,
+  fpath: true,
+}
+
 export class Plugin {
   constructor([name, config]) {
     this.name = name
     this.downloadPath = path.join(paths.downloadDir, name)
+
+    this.config = {}
+    Object.assign(this.config, defaultConfig)
     if (isString(config)) {
-      this.github = config
-    } else {
-      this.github = config.github
-      this._sourceFile = config.source
-      this._fpath = config.fpath
+      this.config.github = config
+      return
     }
+    Object.assign(this.config, config)
   }
+
   get fpath() {
-    const f = this._fpath
+    const f = this.config.fpath
     if (f === false) {
       return undefined
     } else if (isString(f)) {
@@ -36,7 +46,7 @@ export class Plugin {
   }
 
   get sourceFile() {
-    const s = this._sourceFile
+    const s = this.config.source
     if (s === false) {
       return undefined
     } else if (isString(s)) {
@@ -45,7 +55,7 @@ export class Plugin {
       return s(this.downloadPath)
     }
     const globs = [
-      `${this.uniqueName}?(.plugin).?(z)sh`,
+      `${this.name}?(.plugin).?(z)sh`,
       '*.plugin.zsh',
       'init.zsh',
       '*.zsh',
@@ -59,8 +69,23 @@ export class Plugin {
     })
   }
 
+  async entry() {
+    let result = ''
+    if (this.sourceFile) {
+      if (this.config.standalone) {
+        result += await jp.readAsync(this.sourceFile)
+      } else {
+        result += `source ${this.sourceFile}`
+      }
+    }
+    if (this.fpath) {
+      result += `\nfpath+=${this.fpath}`
+    }
+    return result
+  }
+
   async download() {
-    await execa('git', ['clone', '--recursive', '--', `https://github.com/${this.github}.git`, this.downloadPath])
+    await execa('git', ['clone', '--recursive', '--', `https://github.com/${this.config.github}.git`, this.downloadPath])
   }
 
   async update() {
