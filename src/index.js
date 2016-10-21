@@ -8,7 +8,7 @@ import xdg from 'xdg-basedir'
 
 export const paths = {
   downloadDir: path.join(xdg.data, 'zsh-goggles'),
-  configFile: path.join(xdg.config, 'zsh-goggles', 'config.js'),
+  configFile: path.join(xdg.config, 'zsh-goggles', 'config.toml'),
   sourceFile: path.join(xdg.data, 'zsh-goggles', 'plugins.zsh'),
 }
 

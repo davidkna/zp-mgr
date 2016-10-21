@@ -3,6 +3,7 @@ import jp from 'fs-jetpack'
 import entries from 'lodash/entries'
 import includes from 'lodash/includes'
 import mkdirp from 'mkdirp'
+import toml from 'toml'
 
 import { paths, Plugin } from './index'
 
@@ -10,7 +11,7 @@ const { configFile, downloadDir, sourceFile } = paths
 
 mkdirp(downloadDir)
 
-const config = require(configFile) // eslint-disable-line import/no-dynamic-require
+const config = toml.parse(jp.read(configFile, 'utf8'))
 const plugins = entries(config)
 const targetEntries = new Array(plugins.length)
 

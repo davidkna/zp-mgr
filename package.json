@@ -19,6 +19,7 @@
     "listr": "0.6.1",
     "lodash": "4.16.4",
     "mkdirp": "0.5.1",
+    "toml": "2.3.0",
     "uglify-js": "mishoo/UglifyJS2#harmony",
     "xdg-basedir": "2.0.0"
   },
