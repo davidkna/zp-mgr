@@ -4,8 +4,8 @@ module.exports = {
     standalone: false,
   },
   highlight: {
-   github: 'zsh-users/zsh-syntax-highlighting',
-   standalone: false,
+    github: 'zsh-users/zsh-syntax-highlighting',
+    standalone: false,
   },
   search: 'zsh-users/zsh-history-substring-search',
   completion: {
