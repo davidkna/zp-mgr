@@ -1,6 +1,6 @@
 {
   "name": "zsh-goggles",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "description": "stuff",
   "main": "index.js",
   "scripts": {
