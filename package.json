@@ -13,6 +13,7 @@
   "license": "MIT",
   "repository": "davidkna/zsh-goggles",
   "dependencies": {
+    "babel-polyfill": "^6.22.0",
     "execa": "0.6.0",
     "findup-sync": "0.4.3",
     "fs-jetpack": "0.10.5",

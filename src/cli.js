@@ -1,3 +1,4 @@
+import 'babel-polyfill'
 import Listr from 'listr'
 import { downloadTasks, writeTask, cleanupTask } from './tasks'
 import { paths } from './index'
