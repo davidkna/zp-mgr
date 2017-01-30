@@ -34,7 +34,7 @@ export const downloadTasks = plugins.map((p, i) => { // eslint-disable-line
 export async function writeTask() {
   await jp.writeAsync(
     sourceFile,
-    `${targetEntries.join('\n')}`
+    `${targetEntries.join('\n')}`,
   )
 }
 
