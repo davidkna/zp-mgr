@@ -1,6 +1,6 @@
 {
   "name": "zsh-goggles",
-  "version": "1.5.4",
+  "version": "1.5.5",
   "description": "stuff",
   "main": "index.js",
   "scripts": {
@@ -14,22 +14,22 @@
   "repository": "davidkna/zsh-goggles",
   "dependencies": {
     "babel-polyfill": "^6.22.0",
-    "execa": "0.6.0",
-    "findup-sync": "0.4.3",
-    "fs-jetpack": "0.11.0",
-    "listr": "0.9.0",
-    "lodash": "4.17.4",
-    "mkdirp": "0.5.1",
-    "toml": "2.3.1",
-    "uglify-js": "mishoo/UglifyJS2#harmony",
-    "xdg-basedir": "2.0.0"
+    "execa": "^0.6.0",
+    "findup-sync": "^0.4.3",
+    "fs-jetpack": "^0.13.3",
+    "listr": "^0.9.0",
+    "lodash": "^4.17.4",
+    "mkdirp": "^0.5.1",
+    "toml": "^2.3.1",
+    "update-notifier": "^2.1.0",
+    "xdg-basedir": "^2.0.0"
   },
   "devDependencies": {
     "babel-preset-env": "^1.1.8",
     "del": "^2.2.2",
-    "eslint": "3.14.0",
+    "eslint": "^3.14.0",
     "eslint-config-airbnb-base": "11.0.1",
-    "eslint-plugin-import": "2.2.0",
+    "eslint-plugin-import": "^2.2.0",
     "gulp": "gulpjs/gulp#4.0",
     "gulp-babel": "^6.1.2",
     "gulp-eslint": "^3.0.1",
