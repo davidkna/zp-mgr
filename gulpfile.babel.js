@@ -1,7 +1,6 @@
 /* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
 import gulp from 'gulp'
 import babel from 'gulp-babel'
-import eslint from 'gulp-eslint'
 import filter from 'gulp-filter'
 import header from 'gulp-header'
 import minifier from 'gulp-uglify/minifier'
@@ -30,13 +29,6 @@ export function devbuild() {
     .pipe(header('#!/usr/bin/env node\n'))
     .pipe(f.restore)
     .pipe(gulp.dest('./dist'))
-}
-
-export function lint() {
-  return gulp.src(['./*.js', './src/*.js'])
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError())
 }
 
 export default build

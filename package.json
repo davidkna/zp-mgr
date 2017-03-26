@@ -7,7 +7,7 @@
     "build": "gulp build",
     "clean": "rm -r dist",
     "devbuild": "gulp devbuild",
-    "test": "gulp lint"
+    "test": "eslint *.js src/*.js"
   },
   "author": "David Knaack",
   "license": "MIT",
@@ -27,12 +27,11 @@
   "devDependencies": {
     "babel-preset-env": "^1.1.8",
     "del": "^2.2.2",
-    "eslint": "^3.14.0",
+    "eslint": "^3.18.0",
     "eslint-config-airbnb-base": "11.1.2",
     "eslint-plugin-import": "^2.2.0",
     "gulp": "gulpjs/gulp#4.0",
     "gulp-babel": "^6.1.2",
-    "gulp-eslint": "^3.0.1",
     "gulp-filter": "^5.0.0",
     "gulp-header": "^1.8.8",
     "gulp-uglify": "^2.0.0",

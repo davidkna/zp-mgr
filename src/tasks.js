@@ -19,13 +19,13 @@ export const downloadTasks = plugins.map((p, i) => { // eslint-disable-line
   return {
     title: `Downloading ${p[1].github || p[1]}...`,
     async task() {
-      const plugin = plugins[i] = new Plugin(p)
-      if (jp.exists(plugin.downloadPath)) {
-        await plugin.update()
+      plugins[i] = new Plugin(p)
+      if (jp.exists(plugins[i].downloadPath)) {
+        await plugins[i].update()
       } else {
-        await plugin.download()
+        await plugins[i].download()
       }
-      targetEntries[i] = await plugin.entry()
+      targetEntries[i] = await plugins[i].entry()
     },
   }
 })
