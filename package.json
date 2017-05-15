@@ -15,7 +15,7 @@
   "dependencies": {
     "babel-polyfill": "^6.22.0",
     "execa": "^0.6.0",
-    "findup-sync": "^0.4.3",
+    "findup-sync": "^1.0.0",
     "fs-jetpack": "^0.13.3",
     "listr": "^0.11.0",
     "lodash": "^4.17.4",
