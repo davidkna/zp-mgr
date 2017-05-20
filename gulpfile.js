@@ -1,10 +1,9 @@
-/* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
-import gulp from 'gulp'
-import babel from 'gulp-babel'
-import filter from 'gulp-filter'
-import header from 'gulp-header'
-import minifier from 'gulp-uglify/minifier'
-import uglify from 'uglify-js'
+const gulp = require('gulp')
+const babel = require('gulp-babel')
+const filter = require('gulp-filter')
+const header = require('gulp-header')
+const minifier = require('gulp-uglify/minifier')
+const uglify = require('uglify-js')
 
 export function build() {
   const f = filter('src/cli.js', {
