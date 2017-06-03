@@ -2,23 +2,25 @@ const gulp = require('gulp')
 const babel = require('gulp-babel')
 const filter = require('gulp-filter')
 const header = require('gulp-header')
-const minifier = require('gulp-uglify/minifier')
-const uglify = require('uglify-js')
+const uglify = require('uglify-es')
+const composer = require('gulp-uglify/composer')
 
-export function build() {
+const minify = composer(uglify, console)
+
+function build() {
   const f = filter('src/cli.js', {
     restore: true,
   })
   return gulp.src('./src/*.js')
     .pipe(babel())
-    .pipe(minifier({}, uglify))
+    .pipe(minify({}))
     .pipe(f)
     .pipe(header('#!/usr/bin/env node\n'))
     .pipe(f.restore)
     .pipe(gulp.dest('./dist'))
 }
 
-export function devbuild() {
+function devbuild() {
   const f = filter('src/cli.js', {
     restore: true,
   })
@@ -30,4 +32,7 @@ export function devbuild() {
     .pipe(gulp.dest('./dist'))
 }
 
-export default build
+module.exports = {
+  build,
+  devbuild,
+}

@@ -35,7 +35,7 @@
     "gulp-filter": "^5.0.0",
     "gulp-header": "^1.8.8",
     "gulp-uglify": "^3.0.0",
-    "uglify-js": "mishoo/UglifyJS2#harmony"
+    "uglify-es": "^3.0.15"
   },
   "engines": {
     "node": ">= 6.0.0"
