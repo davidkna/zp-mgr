@@ -31,7 +31,7 @@
     "eslint-config-airbnb-base": "11.2.0",
     "eslint-plugin-import": "^2.2.0",
     "gulp": "gulpjs/gulp#4.0",
-    "gulp-babel": "^6.1.2",
+    "gulp-babel": "^7.0.0",
     "gulp-filter": "^5.0.0",
     "gulp-header": "^1.8.8",
     "gulp-uglify": "^3.0.0",
