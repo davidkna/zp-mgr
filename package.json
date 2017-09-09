@@ -25,6 +25,7 @@
     "xdg-basedir": "^3.0.0"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
     "babel-preset-env": "^1.5.1",
     "del": "^3.0.0",
     "eslint": "^4.1.0",
