@@ -13,14 +13,25 @@ function build() {
   })
   return gulp.src('./src/*.js')
     .pipe(babel())
-    .pipe(minify({}))
+    .pipe(minify({
+      mangle: {
+        toplevel: true,
+      },
+      compress: {
+        toplevel: true,
+        unsafe: true,
+        passes: 3,
+      },
+      toplevel: true,
+      ecma: 8,
+    }))
     .pipe(f)
     .pipe(header('#!/usr/bin/env node\n'))
     .pipe(f.restore)
     .pipe(gulp.dest('./dist'))
 }
 
-function devbuild() {
+function devBuild() {
   const f = filter('src/cli.js', {
     restore: true,
   })
@@ -34,5 +45,5 @@ function devbuild() {
 
 module.exports = {
   build,
-  devbuild,
+  devBuild,
 }

@@ -10,7 +10,7 @@ mkdir -p "${XDG_CONFIG_HOME:-$HOME/.config}/zsh-goggles"
 cp test/zsh-goggles.config.toml "${XDG_CONFIG_HOME:-$HOME/.config}/zsh-goggles/config.toml"
 
 echo "Test if it works with no uglify"
-npm run devbuild
+npm run devBuild
 node dist/cli.js
 
 echo "Source file:"
