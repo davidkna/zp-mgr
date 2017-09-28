@@ -11,7 +11,7 @@ const { configFile, downloadDir, sourceFile } = paths
 
 mkdirp(downloadDir)
 
-const config = toml.parse(fse.readFile(configFile, 'utf8'))
+const config = toml.parse(fse.readFileSync(configFile, 'utf8'))
 const plugins = entries(config)
 const targetEntries = new Array(plugins.length)
 
@@ -40,7 +40,7 @@ export async function writeTask() {
 
 export async function cleanupTask() {
   const legalNames = [...plugins.map(plugin => plugin.name), 'plugins.zsh']
-  const list = await fse.readDir(downloadDir)
+  const list = await fse.readdir(downloadDir)
   if (!list) {
     return
   }
