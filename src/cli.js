@@ -7,6 +7,8 @@ import { paths } from './index'
 const pkg = require('../package.json') // eslint-disable-line import/newline-after-import
 updateNotifier({ pkg }).notify()
 
+process.umask(process.umask() | 0o022)
+
 const { sourceFile } = paths
 
 const tasks = new Listr([
