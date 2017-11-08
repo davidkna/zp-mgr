@@ -1,12 +1,12 @@
 {
   "name": "zsh-goggles",
-  "version": "1.5.9",
+  "version": "1.6.1",
   "description": "stuff",
   "main": "index.js",
   "scripts": {
     "build": "gulp build",
     "clean": "rm -r dist",
-    "devbuild": "gulp devbuild",
+    "devBuild": "gulp devBuild",
     "test": "eslint *.js src/*.js"
   },
   "author": "David Knaack",

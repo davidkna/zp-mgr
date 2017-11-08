@@ -72,7 +72,7 @@ export class Plugin {
     let result = ''
     if (this.sourceFile) {
       if (this.config.standalone) {
-        result += await fse.read(this.sourceFile)
+        result += await fse.readFile(this.sourceFile)
       } else {
         result += `source ${this.sourceFile}`
       }
