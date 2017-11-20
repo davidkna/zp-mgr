@@ -2,9 +2,10 @@
   "presets": [
     ["@babel/env", {
       "targets": {
-        "node": "6.10"
+        "node": "6.12"
       },
-      "loose": true
+      "loose": true,
+      "useBuiltIns": "usage"
     }]
   ]
 }

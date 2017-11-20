@@ -1,4 +1,3 @@
-import 'babel-polyfill'
 import Listr from 'listr'
 import updateNotifier from 'update-notifier'
 import { downloadTasks, writeTask, cleanupTask } from './tasks'
