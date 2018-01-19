@@ -34,7 +34,7 @@
     "gulp": "gulpjs/gulp#4.0",
     "gulp-babel": "v8.0.0-beta.0",
     "gulp-filter": "^5.0.0",
-    "gulp-header": "^1.8.8",
+    "gulp-header": "^2.0.1",
     "gulp-uglify": "^3.0.0",
     "uglify-es": "^3.0.15"
   },
