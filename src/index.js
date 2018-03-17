@@ -23,12 +23,12 @@ export class Plugin {
     this.name = name
     this.downloadPath = path.join(paths.downloadDir, name)
 
-    Object.assign(this.config, defaultConfig)
     if (isString(config)) {
+      this.config = { ...defaultConfig }
       this.config.github = config
       return
     }
-    this.config = {...defaultConfig, ...config};
+    this.config = { ...defaultConfig, ...config }
   }
 
   get fpath() {
