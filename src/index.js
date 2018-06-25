@@ -1,9 +1,9 @@
 import path from 'path'
+import execa from 'execa'
 import findup from 'findup-sync'
 import fse from 'fs-extra'
 import isString from 'lodash/isString'
 import isFunction from 'lodash/isFunction'
-import nodegit from 'nodegit'
 import xdg from 'xdg-basedir'
 
 export const paths = {
@@ -83,12 +83,11 @@ export class Plugin {
   }
 
   async download() {
-    await nodegit.Clone(`https://github.com/${this.config.github}.git`, this.downloadPath)
+    await execa('git', ['clone', '--recursive', '--', `https://github.com/${this.config.github}.git`, this.downloadPath])
   }
 
   async update() {
-    const repo = await nodegit.Repository.open(this.downloadPath)
-    await repo.fetchAll()
-    await repo.mergeBranches('master', 'origin/master')
+    await execa('git', ['fetch', '--all'], { cwd: this.downloadPath })
+    await execa('git', ['reset', '--hard', 'origin/master', '--'], { cwd: this.downloadPath })
   }
 }
