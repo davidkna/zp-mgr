@@ -35,9 +35,9 @@ export class Plugin {
     const f = this.config.fpath
     if (f === false) {
       return undefined
-    } else if (isString(f)) {
+    } if (isString(f)) {
       return path.join(this.downloadPath, f)
-    } else if (isFunction(f)) {
+    } if (isFunction(f)) {
       return f(this.downloadPath)
     }
     return this.downloadPath
@@ -47,9 +47,9 @@ export class Plugin {
     const s = this.config.source
     if (s === false) {
       return undefined
-    } else if (isString(s)) {
+    } if (isString(s)) {
       return path.join(this.downloadPath, s)
-    } else if (isFunction(s)) {
+    } if (isFunction(s)) {
       return s(this.downloadPath)
     }
     const globs = [

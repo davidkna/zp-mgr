@@ -14,6 +14,7 @@
   "repository": "davidkna/zsh-goggles",
   "dependencies": {
     "@babel/polyfill": "^7.0.0-beta.32",
+    "execa": "^0.10.0",
     "findup-sync": "^2.0.0",
     "fs-extra": "^6.0.0",
     "listr": "^0.14.1",
