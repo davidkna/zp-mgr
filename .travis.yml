@@ -1,7 +1,7 @@
 language: node_js
 node_js:
-  - "lts/*"
-  - "node"
+  - "8"
+  - "10"
 dist: trusty
 script:
   - bash ./test/test.sh

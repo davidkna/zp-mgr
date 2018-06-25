@@ -2,7 +2,7 @@
   "presets": [
     ["@babel/env", {
       "targets": {
-        "node": "8.10"
+        "node": "8.11.3"
       },
       "loose": true,
       "useBuiltIns": "usage",
