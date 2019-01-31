@@ -20,7 +20,7 @@
     "listr": "^0.14.1",
     "lodash": "^4.17.4",
     "mkdirp": "^0.5.1",
-    "toml": "^2.3.1",
+    "toml": "^3.0.0",
     "update-notifier": "^2.1.0",
     "xdg-basedir": "^3.0.0"
   },

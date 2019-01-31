@@ -3989,9 +3989,9 @@ to-through@^2.0.0:
   dependencies:
     through2 "^2.0.3"
 
-toml@^2.3.1:
-  version "2.3.5"
-  resolved "https://registry.yarnpkg.com/toml/-/toml-2.3.5.tgz#a1f5d7f7efd300fa426258f3e74374536191e3db"
+toml@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/toml/-/toml-3.0.0.tgz#342160f1af1904ec9d204d03a5d61222d762c5ee"
 
 trim-right@^1.0.1:
   version "1.0.1"
