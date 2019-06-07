@@ -4,7 +4,7 @@
       "@babel/env",
       {
         "targets": {
-          "node": "8.11.3"
+          "node": "10.16.0"
         },
         "corejs": 3,
         "loose": true,
