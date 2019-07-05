@@ -596,9 +596,9 @@
     semver "^5.5.0"
 
 "@babel/runtime-corejs3@^7.4.5":
-  version "7.4.5"
-  resolved "https://registry.yarnpkg.com/@babel/runtime-corejs3/-/runtime-corejs3-7.4.5.tgz#7df89702351c5fdc34b5555544fcf11b4ea7051c"
-  integrity sha512-yxHpUObdpx4zbuLJOHIZkw43E4NbWGsGH+85kRUj+VEcdtjlqI0vDcAja9mwOHqD7/4vCZp69q6eztz/sFDibQ==
+  version "7.5.0"
+  resolved "https://registry.yarnpkg.com/@babel/runtime-corejs3/-/runtime-corejs3-7.5.0.tgz#a1d87e8ad9c8f41fb9346ea23424d5cd2cfbe6f5"
+  integrity sha512-hS5GOWvqnYGG4GRbSe63nIc+45DmrIEa/lMGZPgCBq9BSCAZNcKxSDQJKtPDl2T+vaA/an+3G5rVmuh6cJLfqw==
   dependencies:
     core-js-pure "^3.0.0"
     regenerator-runtime "^0.13.2"
