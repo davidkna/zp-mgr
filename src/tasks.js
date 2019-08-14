@@ -39,12 +39,12 @@ export async function writeTask() {
 }
 
 export async function cleanupTask() {
-  const legalNames = [...plugins.map(plugin => plugin.name), 'plugins.zsh']
+  const legalNames = [...plugins.map((plugin) => plugin.name), 'plugins.zsh']
   const list = await fse.readdir(downloadDir)
   if (!list) {
     return
   }
   list
-    .filter(name => !includes(legalNames, name))
-    .forEach(name => fse.removeSync(path.join(downloadDir, name)))
+    .filter((name) => !includes(legalNames, name))
+    .forEach((name) => fse.removeSync(path.join(downloadDir, name)))
 }
