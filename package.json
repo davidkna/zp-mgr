@@ -23,7 +23,7 @@
     "mkdirp": "^0.5.1",
     "regenerator-runtime": "^0.13.2",
     "toml": "^3.0.0",
-    "update-notifier": "^3.0.0",
+    "update-notifier": "^4.0.0",
     "xdg-basedir": "^4.0.0"
   },
   "devDependencies": {
